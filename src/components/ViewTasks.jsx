@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../store/hooks.ts'
+import React, { useEffect, useState } from "react";
+import { useAppSelector } from "../store/hooks.ts";
 
 const ViewTasks = () => {
-  const [taskList, setTaskList] = useState({})
-  const [type, setType] = useState('All')
-  const state = useAppSelector(state => state.todo.todoList)
+  const [taskList, setTaskList] = useState({});
+  const [type, setType] = useState("All");
+  const state = useAppSelector((state) => state.todo.todoList);
 
   // useEffect(() => {
   //   setTaskList(JSON.parse(localStorage.getItem('task')))
@@ -16,8 +16,8 @@ const ViewTasks = () => {
       <select
         className='select w-full max-w-xs text-black'
         value={type}
-        onChange={e => {
-          setType(e.target.value)
+        onChange={(e) => {
+          setType(e.target.value);
         }}
       >
         <option disabled selected>
@@ -30,21 +30,19 @@ const ViewTasks = () => {
       {taskList ? (
         <div className='flex flex-col gap-5 w-full items-center justify-center'>
           {Object.keys(state)
-            .filter(data =>
-              type === 'All' ? data : type === taskList[data].status
+            .filter((data) =>
+              type === "All" ? data : type === taskList[data].status
             )
-            .map(data => {
-              console.log(data)
+            .map((data) => {
               const { task, status, location, date, image, category } =
-                state[data]
-              console.log(taskList)
+                state[data];
               return (
                 <div
                   className=' p-5 border-2 w-6/12 flex  items-center justify-between'
                   key={task}
                 >
                   <div>
-                    {' '}
+                    {" "}
                     <div>Category: {category}</div>
                     <div>Task: {task}</div>
                     <div>Location: {location}</div>
@@ -53,9 +51,9 @@ const ViewTasks = () => {
                     <button
                       className='btn mt-5 text-black border-none btn-sm'
                       onClick={() => {
-                        taskList[data].status = 'Done'
-                        localStorage.setItem('task', JSON.stringify(taskList))
-                        window.location.reload()
+                        taskList[data].status = "Done";
+                        localStorage.setItem("task", JSON.stringify(taskList));
+                        window.location.reload();
                       }}
                     >
                       Mark as done
@@ -65,7 +63,7 @@ const ViewTasks = () => {
                   <img src={image} alt="Task_Image" />
                 </div> */}
                 </div>
-              )
+              );
             })}
         </div>
       ) : (
@@ -74,7 +72,7 @@ const ViewTasks = () => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ViewTasks
+export default ViewTasks;
